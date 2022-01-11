@@ -1,4 +1,5 @@
 const { google } = require('googleapis');
+const dayjs = require('dayjs');
 
 (async () => {
   // https://developers.google.com/sheets/api/guides/authorizing
@@ -19,10 +20,10 @@ const { google } = require('googleapis');
   const writeResponse = await sheets.spreadsheets.values.append({
     spreadsheetId: process.env.SHEET_ID,
     range: 'Sheet1',
-    valueInputOption: 'RAW',
+    valueInputOption: 'USER_ENTERED',
     insertDataOption: 'INSERT_ROWS',
     resource: {
-      values: [['Foo1', 'Bar1']],
+      values: [[dayjs().format('YYYY-MM-DD HH:mm:ss'), 'Foo', 'Bar']],
     },
   });
 })();
